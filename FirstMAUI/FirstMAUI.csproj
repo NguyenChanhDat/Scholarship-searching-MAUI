@@ -65,21 +65,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="LoginPage.xaml.cs">
+	  <Compile Update="Components\SocialButton.xaml.cs">
+	    <DependentUpon>SocialButton.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="ScholarshipListPage.xaml.cs">
+	  <Compile Update="Views\ScholarshipListPage.xaml.cs">
 	    <DependentUpon>ScholarshipListPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="LoginPage.xaml">
+	  <MauiXaml Update="Components\SocialButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ScholarshipListPage.xaml">
+	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ScholarshipListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 </Project>
