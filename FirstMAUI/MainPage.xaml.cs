@@ -1,4 +1,6 @@
-﻿namespace FirstMAUI
+﻿using FirstMAUI.Views;
+
+namespace FirstMAUI
 {
     public partial class MainPage : ContentPage
     {

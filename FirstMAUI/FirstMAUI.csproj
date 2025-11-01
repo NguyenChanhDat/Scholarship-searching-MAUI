@@ -60,16 +60,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Acr.UserDialogs" Version="9.2.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Components\SocialButton.xaml.cs">
-	    <DependentUpon>SocialButton.xaml</DependentUpon>
+	  <Compile Update="Components\SubHeader.xaml.cs">
+	    <DependentUpon>SubHeader.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Components\SocialLoginButton.xaml.cs">
+	    <DependentUpon>SocialLoginButton.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ScholarMatch.xaml.cs">
+	    <DependentUpon>ScholarMatch.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\ScholarshipListPage.xaml.cs">
 	    <DependentUpon>ScholarshipListPage.xaml</DependentUpon>
@@ -77,19 +84,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Components\SocialButton.xaml">
+	  <MauiXaml Update="Components\SubHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\SocialLoginButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ScholarMatch.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ScholarshipListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 </Project>

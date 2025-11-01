@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="FirstMAUI.LoginPage"
+    x:Class="FirstMAUI.Views.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:components="clr-namespace:FirstMAUI.Components"
@@ -24,8 +24,21 @@
             Style="{StaticResource SubHeadline}"
             Text="Đăng nhập để tiếp tục săn họ bổng" />
         <!--  social buttons  -->
-        <components:SocialButton Icon="google.png" Text="Đăng nhập với Google" />
-        <components:SocialButton Icon="facebook.png" Text="Đăng nhập với Facebook" />
+        <components:SocialLoginButton />
 
+        <components:SubHeader Text="hoặc" />
+
+        <Button
+            x:Name="GetScholarshipBtn"
+            BackgroundColor="MidnightBlue"
+            Clicked="LoginByEmailClicked"
+            HorizontalOptions="Fill"
+            SemanticProperties.Hint="Đăng nhập với Email"
+            Text="Đăng nhập với Email" />
+
+        <HorizontalStackLayout>
+            <components:SubHeader Text="Chưa có tài khoản?" />
+            <components:UnderlineSubHeader Text=" Đăng ký ngay" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

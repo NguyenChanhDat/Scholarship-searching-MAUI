@@ -25,6 +25,7 @@
 
             <Button
                 x:Name="StartBtn"
+                BackgroundColor="MidnightBlue"
                 Clicked="NavigateToLoginClicked"
                 HorizontalOptions="Fill"
                 SemanticProperties.Hint="Bắt đầu"
@@ -32,6 +33,7 @@
 
             <Button
                 x:Name="GetScholarshipBtn"
+                BackgroundColor="MidnightBlue"
                 Clicked="NavigateToScholarshipClicked"
                 HorizontalOptions="Fill"
                 SemanticProperties.Hint="Xem học bổng ngay"
