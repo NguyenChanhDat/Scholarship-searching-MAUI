@@ -4,23 +4,27 @@ public partial class SocialLoginButton : ContentView
 {
 
     private Boolean isLoginWithGoogle = false;
-    //private Boolean isLoginWithFacebook = false;
+    private Boolean isLoginWithFacebook = false;
     public SocialLoginButton()
     {
         InitializeComponent();
     }
 
-    public async void OnGoogleLoginClicked(object sender, EventArgs e)
+    public void OnGoogleLoginClicked(object sender, EventArgs e)
     {
         this.isLoginWithGoogle = true;
         if (this.isLoginWithGoogle)
         {
-            await AppShell.Current.GoToAsync(nameof(ScholarshipListPage));
+            App.Current!.Windows[0].Page = new AppShell();
         }
     }
 
     public void OnGoogleFacebookClicked(object sender, EventArgs e)
     {
-
+        this.isLoginWithFacebook = true;
+        if (this.isLoginWithFacebook)
+        {
+            App.Current!.Windows[0].Page = new AppShell();
+        }
     }
 }

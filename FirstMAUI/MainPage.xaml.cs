@@ -12,12 +12,12 @@ namespace FirstMAUI
 
         private async void NavigateToLoginClicked(object sender, EventArgs e)
         {
-            await AppShell.Current.GoToAsync(nameof(LoginPage));
+            await Navigation.PushAsync(new LoginPage());
         }
 
         private async void NavigateToScholarshipClicked(object sender, EventArgs e)
         {
-            await AppShell.Current.GoToAsync(nameof(ScholarshipListPage));
+            await Navigation.PushAsync(new ScholarshipListPage());
         }
     }
 }

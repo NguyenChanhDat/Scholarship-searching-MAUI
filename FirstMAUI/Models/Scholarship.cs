@@ -12,4 +12,18 @@ public class Scholarship
     public bool IsFullScholarship { get; set; }
     public required string Status { get; set; } // e.g. "verified", "pending"
     public required string PostedBy { get; set; } // optional
+
+    public bool IsDeadlineSoon
+    {
+        get
+        {
+            if (DateTime.TryParse(Deadline, out var deadlineDate))
+            {
+                return deadlineDate <= DateTime.Now.AddMonths(1);
+            }
+
+            return false;
+        }
+    }
+
 }

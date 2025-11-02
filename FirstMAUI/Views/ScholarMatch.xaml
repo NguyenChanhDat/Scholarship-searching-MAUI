@@ -1,12 +1,116 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView
+<ContentPage
     x:Class="FirstMAUI.Views.ScholarMatch"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
-</ContentView>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:FirstMAUI.Components">
+    <ScrollView Grid.Row="0">
+        <CollectionView
+            Margin="20"
+            ItemsSource="{Binding Scholarships}"
+            SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Margin="0,10"
+                        Padding="5"
+                        BackgroundColor="White"
+                        Stroke="#ccc"
+                        StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Padding="20" Spacing="10">
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding Title}" />
+
+                            <HorizontalStackLayout Spacing="5">
+                                <!--  Verified  -->
+                                <Border
+                                    Padding="5,2"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 5">
+                                    <Border.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsVerified}"
+                                            TargetType="Border"
+                                            Value="True">
+                                            <Setter Property="BackgroundColor" Value="LightGreen" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding IsVerified}"
+                                            TargetType="Border"
+                                            Value="False">
+                                            <Setter Property="BackgroundColor" Value="LightCoral" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label Text="{Binding IsVerified}" />
+                                </Border>
+
+                                <!--  Full Scholarship  -->
+                                <Border
+                                    Padding="5,2"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 5">
+                                    <Border.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsFullScholarship}"
+                                            TargetType="Border"
+                                            Value="True">
+                                            <Setter Property="BackgroundColor" Value="LightGreen" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding IsFullScholarship}"
+                                            TargetType="Border"
+                                            Value="False">
+                                            <Setter Property="BackgroundColor" Value="LightCoral" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label Text="{Binding IsFullScholarship}" />
+                                </Border>
+
+                                <!--  Deadline  -->
+                                <Border
+                                    Padding="5,2"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 5">
+                                    <Border.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsDeadlineSoon}"
+                                            TargetType="Border"
+                                            Value="True">
+                                            <Setter Property="BackgroundColor" Value="LightCoral" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding IsDeadlineSoon}"
+                                            TargetType="Border"
+                                            Value="False">
+                                            <Setter Property="BackgroundColor" Value="LightGreen" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label Text="{Binding Deadline, StringFormat='⏰ {0}'}" />
+                                </Border>
+                            </HorizontalStackLayout>
+
+
+
+                            <HorizontalStackLayout Spacing="5">
+                                <Label Text="{Binding Country, StringFormat='🌍 {0}'}" />
+                                <Label Text="•" />
+                                <Label Text="{Binding Level, StringFormat='🎓 {0}'}" />
+                                <Label Text="•" />
+                                <Label Text="{Binding Field, StringFormat='💼 {0}'}" />
+                            </HorizontalStackLayout>
+
+                            <Label
+                                FontSize="13"
+                                Text="{Binding Description}"
+                                TextColor="Gray" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

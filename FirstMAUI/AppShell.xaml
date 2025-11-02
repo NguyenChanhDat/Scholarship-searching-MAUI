@@ -1,15 +1,36 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="FirstMAUI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:FirstMAUI"
-    Title="FirstMAUI">
+    xmlns:views="clr-namespace:FirstMAUI.Views"
+    Shell.BackgroundColor="MidnightBlue"
+    Shell.NavBarHasShadow="False"
+    Shell.TitleColor="White">
 
+    <TabBar>
+        <ShellContent
+            Title="Trang chủ"
+            ContentTemplate="{DataTemplate views:ScholarMatch}"
+            Icon="main_menu.png" />
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        <ShellContent
+            Title="Gợi ý"
+            ContentTemplate="{DataTemplate views:SuggestionPage}"
+            Icon="hint.png" />
 
+        <ShellContent
+            Title="Đã lưu"
+            ContentTemplate="{DataTemplate views:SavePage}"
+            Icon="save.png" />
+
+        <ShellContent
+            Title="Cộng đồng"
+            ContentTemplate="{DataTemplate views:CommunityPage}"
+            Icon="community.png" />
+
+        <ShellContent
+            Title="Hồ sơ"
+            ContentTemplate="{DataTemplate views:ProfilePage}"
+            Icon="personal.png" />
+    </TabBar>
 </Shell>

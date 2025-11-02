@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="FirstMAUI.Components.TabBar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <HorizontalStackLayout>
+        <VerticalStackLayout>
+            <Image
+                Aspect="AspectFit"
+                HeightRequest="30"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine"
+                Source="main_menu.png" />
+
+            <Label
+                HorizontalOptions="Center"
+                Text="Trang chủ"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Image
+                Aspect="AspectFit"
+                HeightRequest="30"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine"
+                Source="hint.png" />
+
+            <Label
+                HorizontalOptions="Center"
+                Text="Gợi ý"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Image
+                Aspect="AspectFit"
+                HeightRequest="30"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine"
+                Source="save.png" />
+
+            <Label
+                HorizontalOptions="Center"
+                Text="Đã lưu"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Image
+                Aspect="AspectFit"
+                HeightRequest="30"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine"
+                Source="community.png" />
+
+            <Label
+                HorizontalOptions="Center"
+                Text="Cộng đồng"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Image
+                Aspect="AspectFit"
+                HeightRequest="30"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine"
+                Source="personal.png" />
+
+            <Label
+                HorizontalOptions="Center"
+                Text="Hồ sơ"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+
+    </HorizontalStackLayout>
+</ContentView>

@@ -66,6 +66,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Components\TabBar.xaml.cs">
+	    <DependentUpon>TabBar.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Components\SubHeader.xaml.cs">
 	    <DependentUpon>SubHeader.xaml</DependentUpon>
 	  </Compile>
@@ -74,6 +77,18 @@
 	  </Compile>
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\CommunityPage.xaml.cs">
+	    <DependentUpon>CommunityPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\SuggestionPage.xaml.cs">
+	    <DependentUpon>SuggestionPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ProfilePage.xaml.cs">
+	    <DependentUpon>ProfilePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\SavePage.xaml.cs">
+	    <DependentUpon>SavePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\ScholarMatch.xaml.cs">
 	    <DependentUpon>ScholarMatch.xaml</DependentUpon>
@@ -84,6 +99,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\TabBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\SubHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -91,6 +109,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CommunityPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SuggestionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SavePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ScholarMatch.xaml">

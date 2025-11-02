@@ -8,12 +8,12 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
 
-    public async void LoginByEmailClicked(object sender, EventArgs e)
+    public void LoginByEmailClicked(object sender, EventArgs e)
     {
         this.isLoginByEmail = true;
         if (isLoginByEmail)
         {
-            await AppShell.Current.GoToAsync(nameof(ScholarshipListPage));
+            App.Current!.Windows[0].Page = new AppShell();
         }
     }
 }
