@@ -36,7 +36,7 @@
             SemanticProperties.Hint="Đăng nhập với Email"
             Text="Đăng nhập với Email" />
 
-        <HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center">
             <components:SubHeader Text="Chưa có tài khoản?" />
             <components:UnderlineSubHeader Text=" Đăng ký ngay" />
         </HorizontalStackLayout>
