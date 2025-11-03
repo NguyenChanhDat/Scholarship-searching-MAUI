@@ -15,7 +15,11 @@ namespace FirstMAUI.Utils
                 else
                     return Colors.DarkRed;
             }
+<<<<<<< HEAD
             Console.WriteLine("This commit came from master branch");
+=======
+            Console.WriteLine("This commit came from other branch than master");
+>>>>>>> 3701782 (feat: add log for 2nd branch)
             return Colors.Black; // fallback
         }
 
