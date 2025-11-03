@@ -15,7 +15,7 @@ namespace FirstMAUI.Utils
                 else
                     return Colors.DarkRed;
             }
-
+            Console.WriteLine("This commit came from master branch");
             return Colors.Black; // fallback
         }
 
