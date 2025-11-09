@@ -6,6 +6,7 @@ public static class MockScholarshipData
     [
         new Scholarship
         {
+            Id = 1,
             Title = "Fulbright Master's Program",
             Country = "Hoa Kỳ",
             Level = "Thạc sĩ",
@@ -15,10 +16,17 @@ public static class MockScholarshipData
             IsVerified = true,
             IsFullScholarship = true,
             Status = "verified",
-            PostedBy = null
+            PostedBy = null,
+            Priviledges = "Học phí toàn phần: Chi trả 100% học phí cho toàn bộ chương trình thạc sĩ (2 năm)\n" +
+                    "Sinh hoạt phí: Khoảng $1,500-2,000/tháng tùy theo thành phố\n" +
+                    "Vé máy bay: Vé khứ hồi Việt Nam - Hoa Kỳ\n" +
+                    "Bảo hiểm y tế: Bảo hiểm y tế toàn diện trong suốt thời gian học\n" +
+                    "Chi phí sách vở: Hỗ trợ mua sách và tài liệu học tập\n" +
+                    "Hỗ trợ nghiên cứu: Kinh phí cho các hoạt động nghiên cứu và hội thảo",
         },
         new Scholarship
         {
+            Id = 2,
             Title = "Chevening Scholarship",
             Country = "Vương quốc Anh",
             Level = "Thạc sĩ",
@@ -32,6 +40,7 @@ public static class MockScholarshipData
         },
         new Scholarship
         {
+            Id = 3,
             Title = "DAAD Scholarship",
             Country = "Đức",
             Level = "Thạc sĩ / Tiến sĩ",

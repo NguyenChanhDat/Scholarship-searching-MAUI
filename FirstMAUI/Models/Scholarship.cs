@@ -2,6 +2,7 @@ namespace FirstMAUI.Models;
 
 public class Scholarship
 {
+    public required int Id { get; set; }
     public required string Title { get; set; }
     public required string Country { get; set; }
     public required string Level { get; set; }
@@ -11,7 +12,9 @@ public class Scholarship
     public bool IsVerified { get; set; }
     public bool IsFullScholarship { get; set; }
     public required string Status { get; set; } // e.g. "verified", "pending"
-    public required string PostedBy { get; set; } // optional
+    public string PostedBy { get; set; } // optional
+
+    public string Priviledges { get; set; } // optional
 
     public bool IsDeadlineSoon
     {

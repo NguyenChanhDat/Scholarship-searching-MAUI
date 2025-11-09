@@ -26,6 +26,11 @@
                         BackgroundColor="White"
                         Stroke="#ccc"
                         StrokeShape="RoundRectangle 10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToDetailCommand}" CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+
                         <VerticalStackLayout Padding="20" Spacing="10">
 
                             <Label
@@ -116,6 +121,19 @@
                                 Text="{Binding Description}"
                                 TextColor="Gray" />
                         </VerticalStackLayout>
+
+                        <!--  visual states  -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="Opacity" Value="0.7" />
+                                        <Setter Property="Scale" Value="0.97" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -81,6 +81,9 @@
 	  <Compile Update="Views\CommunityPage.xaml.cs">
 	    <DependentUpon>CommunityPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\ScholarshipDetail.xaml.cs">
+	    <DependentUpon>ScholarshipDetail.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\SuggestionPage.xaml.cs">
 	    <DependentUpon>SuggestionPage.xaml</DependentUpon>
 	  </Compile>
@@ -112,6 +115,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CommunityPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScholarshipDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SuggestionPage.xaml">
