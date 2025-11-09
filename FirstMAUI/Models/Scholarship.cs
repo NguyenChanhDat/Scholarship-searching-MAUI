@@ -8,6 +8,8 @@ public class Scholarship
     public required string Level { get; set; }
     public required string Field { get; set; }
     public required string Description { get; set; }
+
+    public required string DetailDescription { get; set; }
     public required string Deadline { get; set; }
     public bool IsVerified { get; set; }
     public bool IsFullScholarship { get; set; }

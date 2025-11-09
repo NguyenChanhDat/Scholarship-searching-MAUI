@@ -28,7 +28,7 @@ public partial class ScholarMatch : ContentPage
             { "Scholarship", selectedScholarship }
         };
 
-        await Shell.Current.GoToAsync(nameof(ScholarshipDetail), navParameter);
+        await Shell.Current.GoToAsync(nameof(ScholarshipDetailPage), navParameter);
         //await Navigation.PushAsync(new ScholarshipDetail(selected.Id));
 
     }

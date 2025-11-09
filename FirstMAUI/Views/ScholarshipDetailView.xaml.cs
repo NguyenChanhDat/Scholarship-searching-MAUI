@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls.Shapes;
 namespace FirstMAUI.Views;
 
 [QueryProperty(nameof(Scholarship), "Scholarship")]
-public partial class ScholarshipDetail : ContentPage
+public partial class ScholarshipDetailView : ContentView
 {
     private Scholarship _scholarship;
     public Scholarship Scholarship
@@ -18,7 +18,7 @@ public partial class ScholarshipDetail : ContentPage
         }
     }
 
-    public ScholarshipDetail()
+    public ScholarshipDetailView()
     {
         InitializeComponent();
         BindingContext = this;
@@ -32,6 +32,7 @@ public partial class ScholarshipDetail : ContentPage
 
         TitleLabel.Text = scholarship.Title;
         DescriptionLabel.Text = scholarship.Description;
+        DetailDescriptionLabel.Text = scholarship.DetailDescription;
         CountryLabel.Text = scholarship.Country;
 
         // clear existing badges
@@ -81,6 +82,39 @@ public partial class ScholarshipDetail : ContentPage
             }
         };
         BadgesLayout.Children.Add(deadlineBorder);
+
+
+        // Country badge
+        var countryBorder = new Border
+        {
+            Padding = new Thickness(10, 5),
+            Stroke = Colors.Transparent,
+            StrokeShape = new RoundRectangle { CornerRadius = 8 },
+            BackgroundColor = Colors.LightBlue,
+            Content = new Label
+            {
+                Text = $"🌍 {scholarship.Country}",
+                TextColor = Colors.Black,
+                FontAttributes = FontAttributes.Bold
+            }
+        };
+        InfoBadgesLayout.Children.Add(countryBorder);
+
+        // Degree / Bậc học badge
+        var degreeBorder = new Border
+        {
+            Padding = new Thickness(10, 5),
+            Stroke = Colors.Transparent,
+            StrokeShape = new RoundRectangle { CornerRadius = 8 },
+            BackgroundColor = Colors.LightYellow,
+            Content = new Label
+            {
+                Text = $"🎓 {scholarship.Title}", // or a separate Degree property if you have
+                TextColor = Colors.Black,
+                FontAttributes = FontAttributes.Bold
+            }
+        };
+        InfoBadgesLayout.Children.Add(degreeBorder);
 
 
         // clear previous spans

@@ -1,0 +1,71 @@
+<ContentView
+    x:Class="FirstMAUI.Views.ScholarshipDetailView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!--  Blue area wraps the text  -->
+            <VerticalStackLayout
+                Padding="10"
+                BackgroundColor="MidnightBlue"
+                HorizontalOptions="Fill">
+
+                <Label
+                    x:Name="CountryLabel"
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    TextColor="White" />
+
+                <Label
+                    x:Name="TitleLabel"
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    TextColor="White" />
+
+                <Label
+                    x:Name="DescriptionLabel"
+                    FontSize="16"
+                    TextColor="White" />
+
+
+
+                <!--  Horizontal badges  -->
+                <HorizontalStackLayout x:Name="BadgesLayout" Spacing="5">
+                    <!--  badges will be added dynamically in code  -->
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout
+                x:Name="InfoBadgesLayout"
+                HorizontalOptions="Center"
+                Spacing="10">
+                <!--  dynamically added in code  -->
+            </HorizontalStackLayout>
+
+            <Label
+                FontSize="18"
+                Text="Giới thiệu"
+                TextColor="MidnightBlue" />
+
+            <Label
+                x:Name="DetailDescriptionLabel"
+                FontSize="16"
+                TextColor="Black" />
+
+            <Label
+                FontSize="18"
+                Text="♦ Quyền lợi"
+                TextColor="MidnightBlue" />
+
+            <Label
+                x:Name="PrivilegesLabel"
+                FontSize="16"
+                TextColor="Black" />
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

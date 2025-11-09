@@ -1,0 +1,9 @@
+<!--  ScholarshipDetail.xaml  -->
+<ContentPage
+    x:Class="FirstMAUI.Views.ScholarshipDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:FirstMAUI.Views">
+
+    <views:ScholarshipDetailView x:Name="DetailView" />
+</ContentPage>
