@@ -3,10 +3,56 @@
     x:Class="FirstMAUI.Views.CommunityPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PostCardStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Padding" Value="12" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <SearchBar x:Name="SearchBarControl" Placeholder="Tìm kiếm thảo luận..." />
+
+            <HorizontalStackLayout Spacing="8">
+                <Button x:Name="BtnAll" Text="Tất cả" BackgroundColor="#1F3358" TextColor="White" />
+                <Button x:Name="BtnFulbright" Text="Fulbright" BackgroundColor="#EEF3F8" TextColor="#1F3358" />
+                <Button x:Name="BtnChevening" Text="Chevening" BackgroundColor="#EEF3F8" TextColor="#1F3358" />
+                <Button x:Name="BtnAustralia" Text="Australia Awards" BackgroundColor="#EEF3F8" TextColor="#1F3358" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="CountLabel" Text="156 thảo luận" TextColor="#1F3358" />
+
+            <CollectionView x:Name="PostsCollectionView" ItemsSource="{Binding Posts}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource PostCardStyle}">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding Scholarship.Title}" FontAttributes="Bold" FontSize="15" TextColor="#1F3358" />
+
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <Frame Padding="8" CornerRadius="20" WidthRequest="40" HeightRequest="40" BackgroundColor="#6B46C1">
+                                        <Label Text="{Binding AuthorInitials}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
+                                    </Frame>
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding AuthorName}" FontAttributes="Bold" />
+                                        <Label Text="{Binding TimeAgo}" FontSize="12" TextColor="Gray" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                                <Label Text="{Binding Content}" LineBreakMode="WordWrap" TextColor="#333" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

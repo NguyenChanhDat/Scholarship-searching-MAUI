@@ -1,0 +1,39 @@
+<ContentView
+    x:Class="FirstMAUI.Views.UserInforView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="22"
+                HorizontalOptions="Center"
+                Text="📋 Thông tin cá nhân"
+                TextColor="MidnightBlue" />
+
+            <Frame
+                Padding="15"
+                BackgroundColor="White"
+                BorderColor="LightGray"
+                CornerRadius="10"
+                HasShadow="True">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label FontSize="16" Text="{Binding Name, StringFormat='👤 Họ và tên: {0}'}" />
+                    <Label FontSize="16" Text="{Binding Email, StringFormat='📧 Email: {0}'}" />
+                    <Label FontSize="16" Text="{Binding Phone, StringFormat='📞 Số điện thoại: {0}'}" />
+                    <Label FontSize="16" Text="{Binding Address, StringFormat='🏠 Địa chỉ: {0}'}" />
+
+                    <BoxView HeightRequest="1" Color="LightGray" />
+
+                    <Label FontSize="16" Text="{Binding PreferredStudyLevel, StringFormat='🎓 Bậc học mong muốn: {0}'}" />
+                    <Label FontSize="16" Text="{Binding PreferredFieldOfStudy, StringFormat='💼 Ngành học mong muốn: {0}'}" />
+                    <Label FontSize="16" Text="{Binding PreferredCountry, StringFormat='🌍 Quốc gia mong muốn: {0}'}" />
+                    <Label FontSize="16" Text="{Binding GPA, StringFormat='⭐ GPA: {0:F2}'}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

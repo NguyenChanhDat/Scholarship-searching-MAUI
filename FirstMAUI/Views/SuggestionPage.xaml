@@ -14,95 +14,146 @@
     </ContentPage.Resources>
 
     <ScrollView Grid.Row="0">
-        <CollectionView
-            Margin="20"
-            ItemsSource="{Binding Scholarships}"
-            SelectionMode="None">
+        <VerticalStackLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                        Margin="0,10"
-                        Padding="5"
-                        BackgroundColor="White"
-                        Stroke="#ccc"
-                        StrokeShape="RoundRectangle 10">
-                        <VerticalStackLayout Padding="20" Spacing="10">
+            <!--  Header: profile analysis  -->
+            <Border
+                Margin="20,20,20,10"
+                Padding="16"
+                StrokeShape="RoundRectangle12">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="DarkBlue" />
+                        <GradientStop Offset="1" Color="MidnightBlue" />
+                    </LinearGradientBrush>
+                </Border.Background>
 
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="18"
-                                Text="{Binding Title}" />
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                        <Label
+                            FontSize="20"
+                            Text="🎯"
+                            TextColor="White" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Phân tích hồ sơ"
+                            TextColor="White" />
+                    </HorizontalStackLayout>
 
-                            <HorizontalStackLayout Spacing="5">
-                                <!--  Verified  -->
-                                <Border
-                                    Padding="5,2"
-                                    Stroke="Transparent"
-                                    StrokeShape="RoundRectangle 5">
-                                    <Border.Triggers>
-                                        <DataTrigger
-                                            Binding="{Binding IsVerified}"
-                                            TargetType="Border"
-                                            Value="True">
-                                            <Setter Property="BackgroundColor" Value="LightGreen" />
-                                        </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding IsVerified}"
-                                            TargetType="Border"
-                                            Value="False">
-                                            <Setter Property="BackgroundColor" Value="LightCoral" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-                                    <Label Text="{Binding IsVerified, Converter={StaticResource BoolToVietnameseVerifiedConverter}, ConverterParameter=IsVerified}" />
-                                </Border>
+                    <Label
+                        FontSize="14"
+                        Text="Dựa trên thông tin của bạn, chúng tôi tìm thấy 12 học bổng phù hợp"
+                        TextColor="White" />
 
-                                <!--  Full Scholarship  -->
-                                <Border
-                                    Padding="5,2"
-                                    Stroke="Transparent"
-                                    StrokeShape="RoundRectangle 5">
-                                    <Border.Triggers>
-                                        <DataTrigger
-                                            Binding="{Binding IsFullScholarship}"
-                                            TargetType="Border"
-                                            Value="True">
-                                            <Setter Property="BackgroundColor" Value="LightGreen" />
-                                        </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding IsFullScholarship}"
-                                            TargetType="Border"
-                                            Value="False">
-                                            <Setter Property="BackgroundColor" Value="LightYellow" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-                                    <Label Text="{Binding IsFullScholarship, Converter={StaticResource BoolToVietnameseVerifiedConverter}, ConverterParameter=IsFullScholarship}" />
-                                </Border>
-                            </HorizontalStackLayout>
+                    <ProgressBar
+                        BackgroundColor="#E6E6E6"
+                        HeightRequest="8"
+                        Progress="0.85"
+                        ProgressColor="#33C481" />
 
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="13"
-                                Text="{Binding SuitableLevel, StringFormat='Phù hợp {0}%'}"
-                                TextColor="{Binding SuitableLevel, Converter={StaticResource SuitableLevelToColorConverter}}" />
+                    <Label
+                        FontSize="12"
+                        Text="Mức độ phù hợp: 85%"
+                        TextColor="White" />
+                </VerticalStackLayout>
+            </Border>
+
+            <CollectionView
+                Margin="20"
+                ItemsSource="{Binding Scholarships}"
+                SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="0,10"
+                            Padding="5"
+                            BackgroundColor="White"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle10">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToDetailCommand}" CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
 
 
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="{Binding Country, StringFormat='🌍 {0}'}" />
-                                <Label Text="•" />
-                                <Label Text="{Binding Level, StringFormat='🎓 {0}'}" />
-                                <Label Text="•" />
-                                <Label Text="{Binding Field, StringFormat='💼 {0}'}" />
-                            </HorizontalStackLayout>
+                            <VerticalStackLayout Padding="20" Spacing="10">
 
-                            <Label
-                                FontSize="13"
-                                Text="{Binding Description}"
-                                TextColor="Gray" />
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    Text="{Binding Title}" />
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <!--  Verified  -->
+                                    <Border
+                                        Padding="5,2"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 5">
+                                        <Border.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding IsVerified}"
+                                                TargetType="Border"
+                                                Value="True">
+                                                <Setter Property="BackgroundColor" Value="LightGreen" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding IsVerified}"
+                                                TargetType="Border"
+                                                Value="False">
+                                                <Setter Property="BackgroundColor" Value="LightCoral" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+                                        <Label Text="{Binding IsVerified, Converter={StaticResource BoolToVietnameseVerifiedConverter}, ConverterParameter=IsVerified}" />
+                                    </Border>
+
+                                    <!--  Full Scholarship  -->
+                                    <Border
+                                        Padding="5,2"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 5">
+                                        <Border.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding IsFullScholarship}"
+                                                TargetType="Border"
+                                                Value="True">
+                                                <Setter Property="BackgroundColor" Value="LightGreen" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding IsFullScholarship}"
+                                                TargetType="Border"
+                                                Value="False">
+                                                <Setter Property="BackgroundColor" Value="LightYellow" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+                                        <Label Text="{Binding IsFullScholarship, Converter={StaticResource BoolToVietnameseVerifiedConverter}, ConverterParameter=IsFullScholarship}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    Text="{Binding SuitableLevel, StringFormat='Phù hợp {0}%'}"
+                                    TextColor="{Binding SuitableLevel, Converter={StaticResource SuitableLevelToColorConverter}}" />
+
+
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label Text="{Binding Country, StringFormat='🌍 {0}'}" />
+                                    <Label Text="•" />
+                                    <Label Text="{Binding Level, StringFormat='🎓 {0}'}" />
+                                    <Label Text="•" />
+                                    <Label Text="{Binding Field, StringFormat='💼 {0}'}" />
+                                </HorizontalStackLayout>
+
+                                <Label
+                                    FontSize="13"
+                                    Text="{Binding Description}"
+                                    TextColor="Gray" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

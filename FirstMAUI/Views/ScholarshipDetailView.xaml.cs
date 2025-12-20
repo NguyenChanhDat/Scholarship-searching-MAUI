@@ -7,6 +7,7 @@ namespace FirstMAUI.Views;
 public partial class ScholarshipDetailView : ContentView
 {
     private Scholarship _scholarship;
+
     public Scholarship Scholarship
     {
         get => _scholarship;
@@ -34,6 +35,14 @@ public partial class ScholarshipDetailView : ContentView
         DescriptionLabel.Text = scholarship.Description;
         DetailDescriptionLabel.Text = scholarship.DetailDescription;
         CountryLabel.Text = scholarship.Country;
+        ScholarshipUrlLabel.Text = scholarship.ScholarshipUrl;
+        ApplicationUrlLabel.Text = scholarship.ApplicationUrl;
+
+        // update Save button text from model
+        if (SaveButton != null)
+        {
+            SaveButton.Text = scholarship.IsSaved ? "💜 Đã lưu" : "💜 Lưu";
+        }
 
         // clear existing badges
         BadgesLayout.Children.Clear();
@@ -77,7 +86,7 @@ public partial class ScholarshipDetailView : ContentView
             BackgroundColor = scholarship.IsDeadlineSoon ? Colors.LightCoral : Colors.LightGreen,
             Content = new Label
             {
-                Text = $"⏰ {scholarship.Deadline:dd/MM/yyyy}",
+                Text = scholarship.Deadline != null ? $"⏰ {scholarship.Deadline}" : string.Empty,
                 TextColor = Colors.Black
             }
         };
@@ -117,40 +126,146 @@ public partial class ScholarshipDetailView : ContentView
         InfoBadgesLayout.Children.Add(degreeBorder);
 
 
-        // clear previous spans
-        PrivilegesLabel.FormattedText = new FormattedString();
-
-        var lines = scholarship.Priviledges.Split('\n');
-        foreach (var line in lines)
+        // only populate the privileges label if privileges text exists
+        if (!string.IsNullOrWhiteSpace(scholarship.Priviledges))
         {
-            // split line at the first colon
-            var parts = line.Split(new[] { ':' }, 2);
+            PrivilegesLabel.IsVisible = true;
+            PrivilegesLabel.FormattedText = new FormattedString();
 
-            if (parts.Length == 2)
+            var lines = scholarship.Priviledges.Split('\n');
+            foreach (var line in lines)
             {
-                // bold part before colon
-                PrivilegesLabel.FormattedText.Spans.Add(new Span
-                {
-                    Text = "• " + parts[0] + ": ",
-                    FontAttributes = FontAttributes.Bold
-                });
+                // split line at the first colon
+                var parts = line.Split(new[] { ':' }, 2);
 
-                // normal part after colon
-                PrivilegesLabel.FormattedText.Spans.Add(new Span
+                if (parts.Length == 2)
                 {
-                    Text = parts[1] + "\n"
-                });
-            }
-            else
-            {
-                // no colon in line, just normal
-                PrivilegesLabel.FormattedText.Spans.Add(new Span
+                    // bold part before colon
+                    PrivilegesLabel.FormattedText.Spans.Add(new Span
+                    {
+                        Text = "• " + parts[0] + ": ",
+                        FontAttributes = FontAttributes.Bold
+                    });
+
+                    // normal part after colon
+                    PrivilegesLabel.FormattedText.Spans.Add(new Span
+                    {
+                        Text = parts[1] + "\n"
+                    });
+                }
+                else
                 {
-                    Text = "• " + line + "\n"
-                });
+                    // no colon in line, just normal
+                    PrivilegesLabel.FormattedText.Spans.Add(new Span
+                    {
+                        Text = "• " + line + "\n"
+                    });
+                }
             }
         }
+        else
+        {
+            // hide or clear the label when no privileges are present
+            PrivilegesLabel.IsVisible = false;
+            PrivilegesLabel.Text = string.Empty;
+            PrivilegesLabel.FormattedText = null;
+        }
 
+        // === Comments ===
+        CommentsLayout.Children.Clear();
+        if (scholarship.Comments != null && scholarship.Comments.Any())
+        {
+            foreach (var c in scholarship.Comments)
+            {
+                var commentFrame = new Frame
+                {
+                    Padding = new Thickness(10),
+                    CornerRadius = 10,
+                    BackgroundColor = Colors.WhiteSmoke,
+                    HasShadow = true,
+                    Content = new VerticalStackLayout
+                    {
+                        Spacing = 2,
+                        Children =
+                        {
+                            new Label
+                            {
+                                Text = $"{c.PersonName} ({c.ApplyYear})",
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Colors.MidnightBlue
+                            },
+                            new Label
+                            {
+                                Text = c.Comment,
+                                FontSize = 14,
+                                TextColor = Colors.Black
+                            }
+                        }
+                    }
+                };
+                CommentsLayout.Children.Add(commentFrame);
+            }
+        }
+        else
+        {
+            CommentsLayout.Children.Add(new Label
+            {
+                Text = "Chưa có bình luận nào.",
+                FontAttributes = FontAttributes.Italic,
+                TextColor = Colors.Gray
+            });
+        }
+
+    }
+
+    private void OnUrlTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Label label && !string.IsNullOrWhiteSpace(label.Text))
+        {
+            try
+            {
+                Launcher.OpenAsync(new Uri(label.Text));
+            }
+            catch (Exception)
+            {
+                // optional: handle invalid url
+            }
+        }
+    }
+
+    private void OnSaveClicked(object sender, EventArgs e)
+    {
+        if (Scholarship == null)
+            return;
+
+        Scholarship.IsSaved = !Scholarship.IsSaved;
+
+        if (SaveButton != null)
+        {
+            SaveButton.Text = Scholarship.IsSaved ? "💜 Đã lưu" : "💜 Lưu";
+        }
+    }
+
+    private async void OnShareClicked(object sender, EventArgs e)
+    {
+        var url = ScholarshipUrlLabel?.Text;
+        if (!string.IsNullOrWhiteSpace(url))
+        {
+            await Share.Default.RequestAsync(new ShareTextRequest { Uri = url, Title = "Chia sẻ học bổng" });
+        }
+    }
+
+    private async void OnApplyClicked(object sender, EventArgs e)
+    {
+        var url = ApplicationUrlLabel?.Text ?? ScholarshipUrlLabel?.Text;
+        if (!string.IsNullOrWhiteSpace(url))
+        {
+            try
+            {
+                await Launcher.OpenAsync(new Uri(url));
+            }
+            catch { }
+        }
     }
 
 }

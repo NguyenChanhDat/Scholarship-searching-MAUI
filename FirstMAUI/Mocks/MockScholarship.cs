@@ -2,11 +2,11 @@
 
 public static class MockScholarshipData
 {
-    public static List<Scholarship> GetAll() =>
-    [
+    public static List<Scholarship> GetAll() => new List<Scholarship>
+    {
         new Scholarship
         {
-            Id = 1,
+            Id =1,
             Title = "Fulbright Master's Program",
             Country = "Hoa Kỳ",
             Level = "Thạc sĩ",
@@ -24,10 +24,26 @@ public static class MockScholarshipData
                     "Bảo hiểm y tế: Bảo hiểm y tế toàn diện trong suốt thời gian học\n" +
                     "Chi phí sách vở: Hỗ trợ mua sách và tài liệu học tập\n" +
                     "Hỗ trợ nghiên cứu: Kinh phí cho các hoạt động nghiên cứu và hội thảo",
+            Comments=new List<CommentAttached>
+            {
+                new() {
+                    PersonName="Lê Thị Hồng",
+                    Comment="Mình đã nhận học bổng này năm ngoái và trải nghiệm thật tuyệt vời! Môi trường học tập rất chuyên nghiệp và mình đã có cơ hội kết nối với nhiều bạn bè quốc tế.",
+                    ApplyYear="2023"
+                },
+                new() {
+                    PersonName="Trần Văn Nam",
+                    Comment="Học bổng Fulbright thực sự đã thay đổi cuộc đời mình. Mình khuyến khích các bạn hãy nộp đơn nếu có cơ hội!",
+                    ApplyYear="2022"
+                }
+            },
+            ScholarshipUrl="https://fulbright.org.vn/scholarships/masters-program/",
+            ApplicationUrl="https://apply.fulbright.org.vn/",
+            IsSaved = true
         },
         new Scholarship
         {
-            Id = 2,
+            Id =2,
             Title = "Chevening Scholarship",
             Country = "Vương quốc Anh",
             Level = "Thạc sĩ",
@@ -39,10 +55,11 @@ public static class MockScholarshipData
             IsFullScholarship = true,
             Status = "verified",
             PostedBy = null,
+            IsSaved = false
         },
         new Scholarship
         {
-            Id = 3,
+            Id =3,
             Title = "DAAD Scholarship",
             Country = "Đức",
             Level = "Thạc sĩ / Tiến sĩ",
@@ -53,7 +70,8 @@ public static class MockScholarshipData
             IsVerified = false,
             IsFullScholarship = false,
             Status = "pending",
-            PostedBy = "Nguyễn Minh"
+            PostedBy = "Nguyễn Minh",
+            IsSaved = false
         }
-    ];
+    };
 }

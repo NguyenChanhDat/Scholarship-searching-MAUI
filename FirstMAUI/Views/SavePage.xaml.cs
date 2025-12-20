@@ -1,9 +1,179 @@
+﻿using FirstMAUI.Models;
+using System.Globalization;
+
 namespace FirstMAUI.Views;
 
 public partial class SavePage : ContentPage
 {
+    public List<Scholarship> SavedScholarships { get; set; }
+    private Grid _calendarGrid;
+    private DateTime _currentMonth;
+    private Label _monthLabel;
+    private Button _prevMonthButton;
+    private Button _nextMonthButton;
+    private HorizontalStackLayout _monthNav;
+
     public SavePage()
     {
-        InitializeComponent();
+        // Load XAML at runtime to ensure controls are available without relying on generated InitializeComponent()
+        Microsoft.Maui.Controls.Xaml.Extensions.LoadFromXaml(this, typeof(SavePage));
+
+        SavedScholarships = MockScholarshipData.GetAll().Where(s => s.IsSaved).ToList();
+        BindingContext = this;
+
+        _calendarGrid = this.FindByName<Grid>("CalendarGrid");
+        _monthLabel = this.FindByName<Label>("MonthLabel");
+        _prevMonthButton = this.FindByName<Button>("PrevMonthButton");
+        _nextMonthButton = this.FindByName<Button>("NextMonthButton");
+        _monthNav = this.FindByName<HorizontalStackLayout>("MonthNav");
+
+        if (_prevMonthButton != null) _prevMonthButton.Clicked += OnPrevMonthClicked;
+        if (_nextMonthButton != null) _nextMonthButton.Clicked += OnNextMonthClicked;
+
+        _currentMonth = DateTime.Now;
+        UpdateMonthLabel();
+
+        // align month nav to calendar width when calendar measures
+        if (_calendarGrid != null && _monthNav != null)
+        {
+            _calendarGrid.SizeChanged += (s, e) =>
+            {
+                // set width request to match calendar width so centered nav aligns with calendar
+                _monthNav.WidthRequest = _calendarGrid.Width;
+            };
+        }
+
+        // build calendar for current month and highlight deadlines
+        BuildCalendar(_currentMonth);
+    }
+
+    private void UpdateMonthLabel()
+    {
+        if (_monthLabel != null)
+            _monthLabel.Text = _currentMonth.ToString("MMMM yyyy");
+    }
+
+    private void OnPrevMonthClicked(object sender, EventArgs e)
+    {
+        _currentMonth = _currentMonth.AddMonths(-1);
+        UpdateMonthLabel();
+        BuildCalendar(_currentMonth);
+    }
+
+    private void OnNextMonthClicked(object sender, EventArgs e)
+    {
+        _currentMonth = _currentMonth.AddMonths(1);
+        UpdateMonthLabel();
+        BuildCalendar(_currentMonth);
+    }
+
+    private void BuildCalendar(DateTime month)
+    {
+        if (_calendarGrid == null)
+            return;
+
+        _calendarGrid.Children.Clear();
+
+        // populate weekday headers in row0 (Monday..Sunday)
+        string[] headers = new[] { "T2", "T3", "T4", "T5", "T6", "T7", "CN" };
+        for (int c = 0; c < 7; c++)
+        {
+            var headerFrame = new Frame
+            {
+                Padding = 8,
+                BackgroundColor = Color.FromArgb("#133155"),
+                CornerRadius = 8,
+                HasShadow = false,
+                HeightRequest = 40,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center
+            };
+            headerFrame.Content = new Label { Text = headers[c], TextColor = Colors.White, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Center };
+            _calendarGrid.Add(headerFrame, c, 0);
+        }
+
+        // collect deadlines from saved scholarships that parse correctly
+        var deadlines = new List<DateTime>();
+        var formats = new[] { "dd/MM/yyyy", "d/M/yyyy", "d/MM/yyyy", "dd/M/yyyy" };
+        foreach (var s in SavedScholarships)
+        {
+            if (string.IsNullOrWhiteSpace(s.Deadline))
+                continue;
+
+            if (DateTime.TryParseExact(s.Deadline, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var d))
+            {
+                // only include deadlines in the target month/year for highlighting
+                if (d.Year == month.Year && d.Month == month.Month)
+                    deadlines.Add(d);
+            }
+        }
+
+        var firstOfMonth = new DateTime(month.Year, month.Month, 1);
+        // Map DayOfWeek so Monday ->0, Sunday ->6
+        int firstDayColumn = ((int)firstOfMonth.DayOfWeek + 6) % 7;
+        int daysInMonth = DateTime.DaysInMonth(month.Year, month.Month);
+
+        for (int day = 1; day <= daysInMonth; day++)
+        {
+            int index = firstDayColumn + (day - 1);
+            int row = (index / 7) + 1; // +1 because row0 is headers
+            int col = index % 7;
+
+            var frame = new Frame
+            {
+                Padding = 0,
+                BackgroundColor = Colors.Transparent,
+                CornerRadius = 8,
+                HasShadow = false,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+            };
+
+            var lbl = new Label
+            {
+                Text = day.ToString(),
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                TextColor = Colors.Black
+            };
+
+            // highlight if deadline
+            var thisDate = new DateTime(month.Year, month.Month, day);
+            if (deadlines.Any(d => d.Date == thisDate.Date))
+            {
+                frame.BackgroundColor = Color.FromArgb("#FFDDE0");
+                lbl.TextColor = Color.FromArgb("#133155");
+
+                // optionally add a small dot or badge for each matching scholarship
+                var badge = new BoxView
+                {
+                    Color = Color.FromArgb("#FF6B6B"),
+                    HeightRequest = 6,
+                    WidthRequest = 6,
+                    CornerRadius = 3,
+                    HorizontalOptions = LayoutOptions.End,
+                    VerticalOptions = LayoutOptions.End,
+                    Margin = new Thickness(0, 0, 4, 4)
+                };
+
+                var grid = new Grid();
+                grid.Children.Add(lbl);
+                grid.Children.Add(badge);
+                frame.Content = grid;
+            }
+            else
+            {
+                frame.Content = lbl;
+            }
+
+            // ensure grid has enough rows; row0 is headers, so day rows start at1
+            _calendarGrid.Add(frame, col, row);
+        }
+    }
+
+    private async void OnReminderClicked(object sender, EventArgs e)
+    {
+        // placeholder: show simple alert
+        await DisplayAlert("Nhắc nhở", "Đặt nhắc nhở chưa được triển khai trong mock.", "OK");
     }
 }

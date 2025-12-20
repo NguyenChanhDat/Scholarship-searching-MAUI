@@ -2,7 +2,7 @@ namespace FirstMAUI.Models;
 
 public class ScholarshipSuggestion
 {
-
+    public required int Id { get; set; }
     public required string Title { get; set; }
     public required string Country { get; set; }
     public required string Level { get; set; }
@@ -13,4 +13,5 @@ public class ScholarshipSuggestion
     public required string Status { get; set; } // e.g. "verified", "pending"
     public required string PostedBy { get; set; } // optional
     public required int SuitableLevel { get; set; }
+    public required string DetailDescription { get; set; }
 }

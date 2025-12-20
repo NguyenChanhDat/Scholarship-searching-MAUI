@@ -3,10 +3,158 @@
     x:Class="FirstMAUI.Views.SavePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="16"
+            HorizontalOptions="FillAndExpand"
+            Spacing="20">
+
+            <!--  Saved Scholarships List  -->
+            <CollectionView
+                x:Name="SavedCollectionView"
+                HorizontalOptions="FillAndExpand"
+                ItemSizingStrategy="MeasureFirstItem"
+                ItemsLayout="VerticalList"
+                ItemsSource="{Binding SavedScholarships}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            Padding="12"
+                            BackgroundColor="White"
+                            BorderColor="#E6EAF0"
+                            CornerRadius="8"
+                            HasShadow="False"
+                            HorizontalOptions="FillAndExpand">
+
+                            <!--  Single-column layout so content fills container width  -->
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--  scholarship info (fills full width)  -->
+                                <VerticalStackLayout
+                                    Grid.Column="0"
+                                    HorizontalOptions="FillAndExpand"
+                                    Spacing="8">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding Title}"
+                                        TextColor="#1F3358" />
+
+                                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                        <Label Text="⏰" />
+                                        <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}" TextColor="#6B6B6B" />
+                                    </HorizontalStackLayout>
+
+                                    <Label
+                                        FontSize="14"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding Description}"
+                                        TextColor="#6B6B6B" />
+
+                                    <Frame
+                                        Padding="6,6"
+                                        BackgroundColor="#F1F9F1"
+                                        BorderColor="#E6F3E8"
+                                        CornerRadius="14"
+                                        HasShadow="False"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            FontSize="13"
+                                            HorizontalOptions="Center"
+                                            Text="Đang chuẩn bị"
+                                            TextColor="#1F7A59"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+
+                                    <Button
+                                        BackgroundColor="#133155"
+                                        CornerRadius="10"
+                                        HeightRequest="44"
+                                        HorizontalOptions="Start"
+                                        Text="🔔 Đặt nhắc nhở"
+                                        TextColor="White" />
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--  Calendar / Deadline section  -->
+            <VerticalStackLayout HorizontalOptions="FillAndExpand" Spacing="8">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    Text="📅 Lịch deadline"
+                    TextColor="#1F3358" />
+
+                <!--  month navigation header  -->
+                <HorizontalStackLayout
+                    x:Name="MonthNav"
+                    Padding="0,4"
+                    HorizontalOptions="Center"
+                    Spacing="12"
+                    VerticalOptions="Center">
+                    <Button
+                        x:Name="PrevMonthButton"
+                        BackgroundColor="MidnightBlue"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        Text="‹"
+                        WidthRequest="36" />
+                    <Label
+                        x:Name="MonthLabel"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        TextColor="#1F3358" />
+                    <Button
+                        x:Name="NextMonthButton"
+                        BackgroundColor="MidnightBlue"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        Text="›"
+                        WidthRequest="36" />
+                </HorizontalStackLayout>
+
+                <!--  combined calendar grid: first row = weekday headers, following rows = dates  -->
+                <Grid
+                    x:Name="CalendarGrid"
+                    ColumnSpacing="8"
+                    HorizontalOptions="FillAndExpand"
+                    RowSpacing="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <!--  weekday headers  -->
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  header cells will be populated in code-behind to ensure perfect alignment  -->
+                </Grid>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -47,8 +47,9 @@
 
             <Label
                 FontSize="18"
-                Text="Giới thiệu"
-                TextColor="MidnightBlue" />
+                Text="📋 Giới thiệu"
+                TextColor="MidnightBlue"
+                FontAttributes="Bold" />
 
             <Label
                 x:Name="DetailDescriptionLabel"
@@ -58,13 +59,83 @@
             <Label
                 FontSize="18"
                 Text="♦ Quyền lợi"
-                TextColor="MidnightBlue" />
+                TextColor="MidnightBlue"
+                FontAttributes="Bold" />
 
             <Label
                 x:Name="PrivilegesLabel"
                 FontSize="16"
                 TextColor="Black" />
 
+            <Label
+                FontSize="18"
+                Text="💬 Người đã nhận học bổng nói gì"
+                TextColor="MidnightBlue"
+                FontAttributes="Bold" />
+
+            <VerticalStackLayout x:Name="CommentsLayout" Spacing="10">
+                <!--  dynamically added comments  -->
+            </VerticalStackLayout>
+
+            <Label
+                FontSize="18"
+                Text="Link chính thức"
+                TextColor="MidnightBlue" />
+
+
+            <Label
+                x:Name="ScholarshipUrlLabel"
+                FontSize="16"
+                TextColor="Blue"
+                TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnUrlTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label
+                x:Name="ApplicationUrlLabel"
+                FontSize="16"
+                TextColor="Blue"
+                TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnUrlTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Footer: Save / Share / Apply -->
+            <HorizontalStackLayout Spacing="12" Padding="10" HorizontalOptions="FillAndExpand">
+
+                <Button
+                    x:Name="SaveButton"
+                    Text="💜 Lưu"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="White"
+                    TextColor="{StaticResource Primary}"
+                    BorderColor="#E6EAF0"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Clicked="OnSaveClicked" />
+
+                <Button
+                    Text="🔗 Chia sẻ"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource Primary}"
+                    BorderColor="{StaticResource Primary}"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Clicked="OnShareClicked" />
+
+                <Button
+                    Text="📝 Nộp hồ sơ ngay"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="{StaticResource White}"
+                    CornerRadius="10"
+                    Clicked="OnApplyClicked" />
+
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

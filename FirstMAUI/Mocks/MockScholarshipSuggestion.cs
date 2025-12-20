@@ -6,6 +6,7 @@ public static class MockScholarshipSuggestionData
     [
         new ScholarshipSuggestion
         {
+            Id = 1,
             Title = "Fulbright Master's Program",
             Country = "Hoa Kỳ",
             Level = "Thạc sĩ",
@@ -15,10 +16,12 @@ public static class MockScholarshipSuggestionData
             IsFullScholarship = true,
             Status = "verified",
             PostedBy = null,
-            SuitableLevel=52
+            SuitableLevel=52,
+            DetailDescription="Chương trình Học bổng Fulbright là một trong những học bổng danh giá nhất dành cho sinh viên Việt Nam muốn theo học chương trình thạc sĩ tại các trường đại học hàng đầu của Hoa Kỳ.\r\n\r\nĐược tài trợ bởi Chính phủ Hoa Kỳ, học bổng này không chỉ hỗ trợ toàn bộ chi phí học tập mà còn mở ra cơ hội networking quốc tế và trải nghiệm môi trường học thuật đẳng cấp thế giới.\r\n\r\n",
         },
         new ScholarshipSuggestion
         {
+            Id = 2,
             Title = "Chevening Scholarship",
             Country = "Vương quốc Anh",
             Level = "Thạc sĩ",
@@ -28,10 +31,12 @@ public static class MockScholarshipSuggestionData
             IsFullScholarship = true,
             Status = "verified",
             PostedBy = null,
-            SuitableLevel=80
+            SuitableLevel=80,
+            DetailDescription="detail description for Chevening Scholarship",
         },
         new ScholarshipSuggestion
         {
+            Id = 3,
             Title = "DAAD Scholarship",
             Country = "Đức",
             Level = "Thạc sĩ / Tiến sĩ",
@@ -41,7 +46,8 @@ public static class MockScholarshipSuggestionData
             IsFullScholarship = false,
             Status = "pending",
             PostedBy = "Nguyễn Minh",
-            SuitableLevel=35
+            SuitableLevel=35,
+            DetailDescription="detail description for DAAD Scholarship",
         }
     ];
 }
