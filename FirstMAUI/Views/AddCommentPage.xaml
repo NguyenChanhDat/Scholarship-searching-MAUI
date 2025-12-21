@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FirstMAUI.Views.AddCommentPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+        <Label
+            FontAttributes="Bold"
+            FontSize="18"
+            Text="Add comment" />
+
+        <!--  Compact colored background for picker with a chevron  -->
+        <Frame
+            Padding="4"
+            BackgroundColor="#EEF3F8"
+            BorderColor="#E6EAF0"
+            CornerRadius="8"
+            HeightRequest="44">
+            <Grid ColumnDefinitions="*,Auto">
+                <Picker
+                    x:Name="ScholarshipPicker"
+                    Title="Select scholarship"
+                    BackgroundColor="Transparent"
+                    HeightRequest="44" />
+                <Label
+                    FontSize="18"
+                    HorizontalOptions="End"
+                    Text="▾"
+                    TextColor="#6B6B6B"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Frame>
+
+        <!-- Title entry for the comment -->
+        <Label Text="Title" />
+        <Frame
+            Padding="4"
+            BackgroundColor="#FFFFFF"
+            CornerRadius="8"
+            BorderColor="#E6EAF0"
+            HasShadow="False">
+            <Entry
+                x:Name="TitleEntry"
+                Placeholder="Enter a short title"
+                PlaceholderColor="#9E9E9E"
+                BackgroundColor="Transparent" />
+        </Frame>
+
+        <Label Text="Content" />
+        <!--  Editor wrapped in a frame to provide a faded border / placeholder area  -->
+        <Frame
+            Padding="6"
+            BackgroundColor="#FFFFFF"
+            CornerRadius="8"
+            BorderColor="#E6EAF0"
+            HasShadow="False">
+            <Editor
+                x:Name="CommentEditor"
+                BackgroundColor="Transparent"
+                HeightRequest="120"
+                Placeholder="Write your comment..."
+                PlaceholderColor="#9E9E9E" />
+        </Frame>
+
+        <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
+            <Button
+                BackgroundColor="#EEEEEE"
+                Clicked="OnCancelClicked"
+                Text="Cancel"
+                TextColor="#666666" />
+            <Button
+                BackgroundColor="#6B46C1"
+                Clicked="OnSubmitClicked"
+                Text="Submit"
+                TextColor="White" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>

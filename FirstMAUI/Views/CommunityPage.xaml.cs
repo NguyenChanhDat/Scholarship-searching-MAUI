@@ -12,6 +12,7 @@ public partial class CommunityPage : ContentPage
     private Button _btnFulbright;
     private Button _btnChevening;
     private Button _btnAustralia;
+    private Button _btnAddComment;
     private SearchBar _searchBar;
     private CollectionView _postsCollectionView;
     private Label _countLabel;
@@ -27,6 +28,7 @@ public partial class CommunityPage : ContentPage
         _btnFulbright = this.FindByName<Button>("BtnFulbright");
         _btnChevening = this.FindByName<Button>("BtnChevening");
         _btnAustralia = this.FindByName<Button>("BtnAustralia");
+        _btnAddComment = this.FindByName<Button>("BtnAddComment");
         _searchBar = this.FindByName<SearchBar>("SearchBarControl");
         _postsCollectionView = this.FindByName<CollectionView>("PostsCollectionView");
         _countLabel = this.FindByName<Label>("CountLabel");
@@ -46,6 +48,7 @@ public partial class CommunityPage : ContentPage
         if (_btnFulbright != null) _btnFulbright.Clicked += OnFilterFulbrightClicked;
         if (_btnChevening != null) _btnChevening.Clicked += OnFilterCheveningClicked;
         if (_btnAustralia != null) _btnAustralia.Clicked += OnFilterAustraliaClicked;
+        if (_btnAddComment != null) _btnAddComment.Clicked += OnAddCommentClicked;
 
         // set default active filter if button exists
         if (_btnAll != null)
@@ -124,5 +127,24 @@ public partial class CommunityPage : ContentPage
     {
         SetActiveButton(_btnAustralia, "Australia");
         ApplyFilter("Australia", _searchBar?.Text ?? string.Empty);
+    }
+
+    private async void OnAddCommentClicked(object sender, EventArgs e)
+    {
+        // open modal AddCommentPage
+        var page = new AddCommentPage();
+        // subscribe for new comment message
+        MessagingCenter.Subscribe<AddCommentPage, CommunityPost>(this, "NewComment", (s, post) =>
+        {
+            // add to mock data and refresh list
+            MockCommunityData.AddPost(post);
+            _allPosts.Add(post);
+            Posts.Insert(0, post);
+            if (_postsCollectionView != null) _postsCollectionView.ItemsSource = null; _postsCollectionView.ItemsSource = Posts;
+            UpdateCount();
+            // unsubscribe
+            MessagingCenter.Unsubscribe<AddCommentPage, CommunityPost>(this, "NewComment");
+        });
+        await Navigation.PushModalAsync(page);
     }
 }

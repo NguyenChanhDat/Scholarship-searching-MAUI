@@ -14,45 +14,107 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="12">
+    <!--  Use a Grid so we can overlay a floating action button (FAB)  -->
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="16" Spacing="12">
 
-            <SearchBar x:Name="SearchBarControl" Placeholder="Tìm kiếm thảo luận..." />
+                <SearchBar x:Name="SearchBarControl" Placeholder="Tìm kiếm thảo luận..." />
 
-            <HorizontalStackLayout Spacing="8">
-                <Button x:Name="BtnAll" Text="Tất cả" BackgroundColor="#1F3358" TextColor="White" />
-                <Button x:Name="BtnFulbright" Text="Fulbright" BackgroundColor="#EEF3F8" TextColor="#1F3358" />
-                <Button x:Name="BtnChevening" Text="Chevening" BackgroundColor="#EEF3F8" TextColor="#1F3358" />
-                <Button x:Name="BtnAustralia" Text="Australia Awards" BackgroundColor="#EEF3F8" TextColor="#1F3358" />
-            </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <Button
+                        x:Name="BtnAll"
+                        BackgroundColor="#1F3358"
+                        Text="Tất cả"
+                        TextColor="White" />
+                    <Button
+                        x:Name="BtnFulbright"
+                        BackgroundColor="#EEF3F8"
+                        Text="Fulbright"
+                        TextColor="#1F3358" />
+                    <Button
+                        x:Name="BtnChevening"
+                        BackgroundColor="#EEF3F8"
+                        Text="Chevening"
+                        TextColor="#1F3358" />
+                    <Button
+                        x:Name="BtnAustralia"
+                        BackgroundColor="#EEF3F8"
+                        Text="Australia Awards"
+                        TextColor="#1F3358" />
+                </HorizontalStackLayout>
 
-            <Label x:Name="CountLabel" Text="156 thảo luận" TextColor="#1F3358" />
+                <Label
+                    x:Name="CountLabel"
+                    Text="156 thảo luận"
+                    TextColor="#1F3358" />
 
-            <CollectionView x:Name="PostsCollectionView" ItemsSource="{Binding Posts}" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Style="{StaticResource PostCardStyle}">
-                            <VerticalStackLayout Spacing="8">
-                                <Label Text="{Binding Scholarship.Title}" FontAttributes="Bold" FontSize="15" TextColor="#1F3358" />
+                <CollectionView
+                    x:Name="PostsCollectionView"
+                    ItemsSource="{Binding Posts}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource PostCardStyle}">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        Text="{Binding Scholarship.Title}"
+                                        TextColor="#1F3358" />
 
-                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Frame Padding="8" CornerRadius="20" WidthRequest="40" HeightRequest="40" BackgroundColor="#6B46C1">
-                                        <Label Text="{Binding AuthorInitials}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
-                                    </Frame>
-                                    <VerticalStackLayout>
-                                        <Label Text="{Binding AuthorName}" FontAttributes="Bold" />
-                                        <Label Text="{Binding TimeAgo}" FontSize="12" TextColor="Gray" />
-                                    </VerticalStackLayout>
-                                </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                        <Frame
+                                            Padding="8"
+                                            BackgroundColor="#6B46C1"
+                                            CornerRadius="20"
+                                            HeightRequest="40"
+                                            WidthRequest="40">
+                                            <Label
+                                                HorizontalOptions="Center"
+                                                Text="{Binding AuthorInitials}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </Frame>
+                                        <VerticalStackLayout>
+                                            <Label FontAttributes="Bold" Text="{Binding AuthorName}" />
+                                            <Label
+                                                FontSize="12"
+                                                Text="{Binding TimeAgo}"
+                                                TextColor="Gray" />
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
 
-                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
-                                <Label Text="{Binding Content}" LineBreakMode="WordWrap" TextColor="#333" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding Title}" />
+                                    <Label
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding Content}"
+                                        TextColor="#333" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!--  Floating action button: positioned bottom-right, with comfortable margin  -->
+        <Button
+            x:Name="FabAddComment"
+            Margin="0,0,24,48"
+            BackgroundColor="#6B46C1"
+            Clicked="OnAddCommentClicked"
+            CornerRadius="28"
+            FontSize="24"
+            HeightRequest="56"
+            HorizontalOptions="End"
+            Text="＋"
+            TextColor="White"
+            VerticalOptions="End"
+            WidthRequest="56" />
+    </Grid>
 </ContentPage>
