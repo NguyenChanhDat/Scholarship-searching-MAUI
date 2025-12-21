@@ -17,7 +17,8 @@
                 ItemSizingStrategy="MeasureFirstItem"
                 ItemsLayout="VerticalList"
                 ItemsSource="{Binding SavedScholarships}"
-                SelectionMode="None">
+                SelectionMode="Single"
+                SelectionChanged="OnSavedSelectionChanged">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame
