@@ -1,6 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace FirstMAUI.Models;
 
-public class Scholarship
+public class Scholarship : INotifyPropertyChanged
 {
     public required int Id { get; set; }
     public required string Title { get; set; }
@@ -23,7 +28,19 @@ public class Scholarship
 
     public string ApplicationUrl { get; set; }
 
-    public bool IsSaved { get; set; } = false; // new property to track saved state
+    private bool _isSaved = false;
+    public bool IsSaved
+    {
+        get => _isSaved;
+        set
+        {
+            if (_isSaved != value)
+            {
+                _isSaved = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public bool IsDeadlineSoon
     {
@@ -38,13 +55,16 @@ public class Scholarship
         }
     }
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
 
 public class CommentAttached
 {
     public string PersonName { get; set; }
-
     public string Comment { get; set; }
     public string ApplyYear { get; set; }
-
 }

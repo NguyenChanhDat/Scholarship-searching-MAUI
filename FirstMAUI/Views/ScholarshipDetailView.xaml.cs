@@ -1,5 +1,6 @@
 ﻿using FirstMAUI.Models;
 using Microsoft.Maui.Controls.Shapes;
+using System.Linq;
 
 namespace FirstMAUI.Views;
 
@@ -238,7 +239,15 @@ public partial class ScholarshipDetailView : ContentView
         if (Scholarship == null)
             return;
 
+        // toggle the view/model instance
         Scholarship.IsSaved = !Scholarship.IsSaved;
+
+        // persist to the shared in-memory list (use All for persistence)
+        var item = MockScholarshipData.All.FirstOrDefault(s => s.Id == Scholarship.Id);
+        if (item != null)
+        {
+            item.IsSaved = Scholarship.IsSaved; // set to the new value (do not invert)
+        }
 
         if (SaveButton != null)
         {

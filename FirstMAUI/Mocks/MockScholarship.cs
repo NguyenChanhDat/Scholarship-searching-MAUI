@@ -2,7 +2,8 @@
 
 public static class MockScholarshipData
 {
-    public static List<Scholarship> GetAll() => new List<Scholarship>
+    // Persistent in-memory collection so changes (e.g. IsSaved) persist across callers
+    public static List<Scholarship> All { get; } = new List<Scholarship>
     {
         new Scholarship
         {
@@ -18,7 +19,7 @@ public static class MockScholarshipData
             IsFullScholarship = true,
             Status = "verified",
             PostedBy = null,
-            Priviledges = "Học phí toàn phần: Chi trả 100% học phí cho toàn bộ chương trình thạc sĩ (2 năm)\n" +
+            Priviledges = "Học phí toàn phần: Chi trả100% học phí cho toàn bộ chương trình thạc sĩ (2 năm)\n" +
                     "Sinh hoạt phí: Khoảng $1,500-2,000/tháng tùy theo thành phố\n" +
                     "Vé máy bay: Vé khứ hồi Việt Nam - Hoa Kỳ\n" +
                     "Bảo hiểm y tế: Bảo hiểm y tế toàn diện trong suốt thời gian học\n" +
@@ -74,4 +75,7 @@ public static class MockScholarshipData
             IsSaved = false
         }
     };
+
+    // Backwards-compatible method - returns the persistent list
+    public static List<Scholarship> GetAll() => All;
 }

@@ -43,7 +43,7 @@
 
                     <Label
                         FontSize="14"
-                        Text="Dựa trên thông tin của bạn, chúng tôi tìm thấy 12 học bổng phù hợp"
+                        Text="Dựa trên thông tin của bạn, chúng tôi tìm thấy 3 học bổng phù hợp"
                         TextColor="White" />
 
                     <ProgressBar
